@@ -1,0 +1,74 @@
+
+
+###
+POST http://localhost:{{auth_server_port}}/create/user
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "email": "{{username}}@email.com",
+  "first_name": "test",
+  "last_name": "user",
+  "password": "{{password}}"
+}
+
+
+###
+POST http://localhost:{{auth_server_port}}/token
+Content-Type: application/x-www-form-urlencoded
+
+username={{username}}&password={{password}}
+
+> {%
+client.global.set("access_token", response.body.access_token);
+client.global.set("token_type", response.body.token_type);
+%}
+
+###
+GET http://localhost:{{todo_server_port}}/todo
+Content-Type: application/json
+Authorization: {{token_type}} {{access_token}}
+
+###
+POST http://localhost:{{todo_server_port}}/todo
+accept: application/json
+Authorization: {{token_type}} {{access_token}}
+Content-Type: application/json
+
+{
+  "title": "string",
+  "description": "string",
+  "priority": 5,
+  "complete": false
+}
+
+> {%
+client.global.set("todo_id", response.body.id);
+%}
+
+###
+GET http://localhost:{{todo_server_port}}/todo/{{todo_id}}
+Content-Type: application/json
+Authorization: {{token_type}} {{access_token}}
+
+###
+PUT http://localhost:{{todo_server_port}}/todo/{{todo_id}}
+accept: application/json
+Authorization: {{token_type}} {{access_token}}
+Content-Type: application/json
+
+{
+  "title": "string",
+  "description": "string",
+  "priority": 5,
+  "complete": true
+}
+
+###
+DELETE http://localhost:{{todo_server_port}}/todo/{{todo_id}}
+Authorization: {{token_type}} {{access_token}}
+
+###
+
+
+
