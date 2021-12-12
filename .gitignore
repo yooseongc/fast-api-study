@@ -11,6 +11,7 @@
 pyvenv.cfg
 .venv
 pip-selfcheck.json
+LICENSE.md
 
 ### Python template
 # Byte-compiled / optimized / DLL files
