@@ -25,12 +25,12 @@ client.global.set("token_type", response.body.token_type);
 %}
 
 ###
-GET http://localhost:{{server_port}}/todo
+GET http://localhost:{{server_port}}/todos
 Content-Type: application/json
 Authorization: {{token_type}} {{access_token}}
 
 ###
-POST http://localhost:{{server_port}}/todo
+POST http://localhost:{{server_port}}/todos
 accept: application/json
 Authorization: {{token_type}} {{access_token}}
 Content-Type: application/json
@@ -47,12 +47,12 @@ client.global.set("todo_id", response.body.id);
 %}
 
 ###
-GET http://localhost:{{server_port}}/todo/{{todo_id}}
+GET http://localhost:{{server_port}}/todos{{todo_id}}
 Content-Type: application/json
 Authorization: {{token_type}} {{access_token}}
 
 ###
-PUT http://localhost:{{server_port}}/todo/{{todo_id}}
+PUT http://localhost:{{server_port}}/todos/{{todo_id}}
 accept: application/json
 Authorization: {{token_type}} {{access_token}}
 Content-Type: application/json
@@ -65,7 +65,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:{{server_port}}/todo/{{todo_id}}
+DELETE http://localhost:{{server_port}}/todos/{{todo_id}}
 Authorization: {{token_type}} {{access_token}}
 
 ###
